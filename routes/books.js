@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { getAllBooks, createBook, deleteBook, updateBook } = require("../controllers/bookController");
 
+//swagger stuffs 
 /**
  * @swagger
  * /books:
