@@ -1,0 +1,14 @@
+{
+
+    "server": {
+    "port": 3000,
+    "env": "development"
+  },
+  
+  "mysql": {
+    "host": "localhost",
+    "user": "root",
+    "password": "IVAN24022010@",
+    "database": "library_system"
+  }
+}
