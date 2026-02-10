@@ -6,9 +6,12 @@
   },
   
   "mysql": {
-    "host": "localhost",
+    "host": "localhost"
+    ,
     "user": "root",
     "password": "IVAN24022010@",
     "database": "library_system"
   }
+  
 }
+
