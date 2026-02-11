@@ -4,7 +4,7 @@ const { borrowBook, returnBook } = require("../controllers/borrowController");
 const authMiddleware = require('../middleware/authMiddleware');
 
 
-//swagger comments
+
 /**
  * @swagger
  * /borrow/borrow:
