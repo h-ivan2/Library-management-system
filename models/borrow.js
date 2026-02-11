@@ -1,4 +1,4 @@
-/*const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 const borrowSchema = new mongoose.Schema({
   userId: {
@@ -23,4 +23,4 @@ const borrowSchema = new mongoose.Schema({
 
 module.exports = mongoose.model("Borrow", borrowSchema);
 
-*/
+
