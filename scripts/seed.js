@@ -52,3 +52,4 @@ const seedUsers = async ()=>{
 };
 seedUsers();
 
+//Added a seed.js files that creates default users 
