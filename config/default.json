@@ -1,5 +1,4 @@
 {
-
     "server": {
     "port": 3000,
     "env": "development"
@@ -11,6 +10,5 @@
     "password": "IVAN24022010@",
     "database": "library_system"
   }
-  
 }
 
