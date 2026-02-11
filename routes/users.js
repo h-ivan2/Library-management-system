@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { createUser, getAllUsers, deleteUser, updateUser } = require("../controllers/userController");
 
+//swagger comments
 /**
  * @swagger
  * /users:
