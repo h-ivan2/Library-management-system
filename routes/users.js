@@ -1,14 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const { createUser, getAllUsers, deleteUser, updateUser } = require("../controllers/userController");
+const authMiddleware =require("../middleware/authMiddleware")
+const requireRole=require("../middleware/roleMiddleware");
+const {createUserRules,updateUserRules} =require("../middleware/validationRules")
+const validate=require("../middleware/validationMiddleware");
 
-//swagger comments
+
 /**
  * @swagger
  * /users:
  *   post:
  *     summary: Create a new user
  *     tags: [Users]
+ *     security:
+ *      -bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -55,12 +61,18 @@ const { createUser, getAllUsers, deleteUser, updateUser } = require("../controll
  *                       type: string
  *                     role:
  *                       type: string
+ *  
+ *       
  *       400:
  *         description: Invalid input or user already exists
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden -  Admins only
  *       500:
  *         description: Server error
  */
-router.post("/", createUser);
+router.post("/",authMiddleware,requireRole('admin'), createUserRules(),validate,createUser);
 
 /**
  * @swagger
@@ -68,6 +80,8 @@ router.post("/", createUser);
  *   get:
  *     summary: Get all users
  *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: List of all users
@@ -89,17 +103,23 @@ router.post("/", createUser);
  *                   created_at:
  *                     type: string
  *                     format: date-time
+ *       401:
+ *         description:Unauthorized
+ *       403:
+ *         description:Forbidden - Admins only
  *       500:
  *         description: Server error
  */
-router.get("/", getAllUsers);
+router.get("/",authMiddleware,requireRole("admin"), getAllUsers);
 
 /**
  * @swagger
  * /users/{id}:
  *   put:
- *     summary: Update a user
+ *     summary: Update a user (Admin only)
  *     tags: [Users]
+ *     security:
+ *       -bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -137,12 +157,16 @@ router.get("/", getAllUsers);
  *                   type: string
  *                 user:
  *                   type: object
+ *       401:
+ *         description:Unauthorized
+ *       403:
+ *         description:Forbidden - Admins only
  *       404:
  *         description: User not found
  *       500:
  *         description: Server error
  */
-router.put("/:id", updateUser);
+router.put("/:id",authMiddleware,requireRole("admin"),updateUserRules(),validate, updateUser);
 
 /**
  * @swagger
@@ -150,6 +174,8 @@ router.put("/:id", updateUser);
  *   delete:
  *     summary: Delete a user
  *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -178,12 +204,16 @@ router.put("/:id", updateUser);
  *                       type: string
  *                     email:
  *                       type: string
+ *       401:
+ *         description:Unauthorized
+ *       403:
+ *         description: Forbidden -Admins only     
  *       404:
  *         description: User not found
  *       500:
  *         description: Server error
  */
-router.delete("/:id", deleteUser);
+router.delete("/:id",authMiddleware,requireRole("admin"), deleteUser);
 
 module.exports = router;
 
