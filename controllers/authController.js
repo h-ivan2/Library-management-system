@@ -58,7 +58,7 @@ const loginUser = async (req, res) => {
 
 const logoutUser=async(req,res)=>{
      try{
-      res.json({message:"Logout sucessful"});
+      res.json({message:"Logout sucessful" ,note:"Please remove the token from client storage"});
 }catch(error){
   console.error(error);
   res.status(500).json({message:'Server error'});
