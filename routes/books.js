@@ -1,45 +1,37 @@
 const express = require("express");
 const router = express.Router();
 const { getAllBooks, createBook, deleteBook, updateBook } = require("../controllers/bookController");
+const authMiddleware = require("../middleware/authMiddleware");
+const requireRole = require("../middleware/roleMiddleware");
+const { createBookRules, updateBookRules } = require("../middleware/validationRules");
+const validate = require("../middleware/validationMiddleware");
 
-//swagger stuffs 
 /**
  * @swagger
  * /books:
  *   get:
  *     summary: Get all books
  *     tags: [Books]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: List of all books
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   _id:
- *                     type: string
- *                   title:
- *                     type: string
- *                   author:
- *                     type: string
- *                   isbn:
- *                     type: string
- *                   available:
- *                     type: boolean
+ *       401:
+ *         description: Unauthorized
  *       500:
  *         description: Server error
  */
-router.get("/", getAllBooks);
+router.get("/", authMiddleware, getAllBooks);
 
 /**
  * @swagger
  * /books:
  *   post:
- *     summary: Create a new book
+ *     summary: Create a new book (Admin only)
  *     tags: [Books]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -63,46 +55,31 @@ router.get("/", getAllBooks);
  *     responses:
  *       201:
  *         description: Book created successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                 book:
- *                   type: object
- *                   properties:
- *                     _id:
- *                       type: string
- *                     title:
- *                       type: string
- *                     author:
- *                       type: string
- *                     isbn:
- *                       type: string
- *                     available:
- *                       type: boolean
  *       400:
  *         description: Invalid input
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden - Admins only
  *       500:
  *         description: Server error
  */
-router.post("/", createBook);
+router.post("/", authMiddleware, requireRole("admin"), createBookRules(), validate, createBook);
 
 /**
  * @swagger
  * /books/{id}:
  *   put:
- *     summary: Update a book
+ *     summary: Update a book (Admin only)
  *     tags: [Books]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Book ID
  *         example: 507f191e810c19729de860ea
  *     requestBody:
  *       required: true
@@ -126,56 +103,44 @@ router.post("/", createBook);
  *     responses:
  *       200:
  *         description: Book updated successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                 book:
- *                   type: object
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden - Admins only
  *       404:
  *         description: Book not found
  *       500:
  *         description: Server error
  */
-router.put("/:id", updateBook);
+router.put("/:id", authMiddleware, requireRole("admin"), updateBookRules(), validate, updateBook);
 
 /**
  * @swagger
  * /books/{id}:
  *   delete:
- *     summary: Delete a book
+ *     summary: Delete a book (Admin only)
  *     tags: [Books]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Book ID to delete
  *         example: 507f191e810c19729de860ea
  *     responses:
  *       200:
  *         description: Book deleted successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: Book deleted successfully
- *                 book:
- *                   type: object
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden - Admins only
  *       404:
  *         description: Book not found
  *       500:
  *         description: Server error
  */
-router.delete("/:id", deleteBook);
+router.delete("/:id", authMiddleware, requireRole("admin"), deleteBook);
 
 module.exports = router;
-
-
