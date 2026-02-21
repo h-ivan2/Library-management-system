@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { borrowBook, returnBook } = require("../controllers/borrowController");
 const authMiddleware = require('../middleware/authMiddleware');
+const {borrowRules} =require("../middleware/validationRules");
+const validate=require("../middleware/validationMiddleware");
 
 
 
@@ -11,6 +13,8 @@ const authMiddleware = require('../middleware/authMiddleware');
  *   post:
  *     summary: Borrow a book
  *     tags: [Borrow]
+ *     security:
+ *       -bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -42,12 +46,14 @@ const authMiddleware = require('../middleware/authMiddleware');
  *                   example: Book borrowed successfully
  *       400:
  *         description: Book not available or invalid request
+ *       401:
+ *         description:Unauthorized - Login required
  *       404:
  *         description: Book or user not found
  *       500:
  *         description: Server error
  */
-router.post("/borrow", borrowBook);
+router.post("/borrow", authMiddleware, borrowRules(),validate,borrowBook);
 
 /**
  * @swagger
@@ -86,12 +92,14 @@ router.post("/borrow", borrowBook);
  *                   example: Book returned successfully
  *       400:
  *         description: Book was not borrowed by this user
+ *       401:
+ *         description: Unauthorized - Login required
  *       404:
  *         description: Transaction not found
  *       500:
  *         description: Server error
  */
-router.post("/return", returnBook);
+router.post("/return", authMiddleware,borrowRules(),validate,returnBook);
 
 module.exports = router;
 
