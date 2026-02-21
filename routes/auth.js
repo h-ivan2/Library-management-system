@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { loginUser ,logoutUser} = require("../controllers/authController");
+const {loginRules}=require("../middleware/validationRules")
+const validate=require("../middleware/validationMiddleware")
 
-
-//swagger documentations 
 /**
  * @swagger
  * /auth/login:
@@ -43,7 +43,7 @@ const { loginUser ,logoutUser} = require("../controllers/authController");
  *       500:
  *         description: Server error
  */
-router.post("/login", loginUser);
+router.post("/login",loginRules(),validate, loginUser);
 
 /**
  * @swagger
@@ -51,6 +51,8 @@ router.post("/login", loginUser);
  *   post:
  *     summary: Logout user
  *     tags: [Auth]
+ *     security:
+ *      -bearerAuth: []
  *     description: Logout the current user. Since JWT is stateless, the client should remove the token from storage.
  *     responses:
  *       200:
