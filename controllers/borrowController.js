@@ -46,7 +46,8 @@ const returnBook = async (req, res) => {
 
     const result = await Borrow.findOneAndUpdate(
       { userId, bookId, returned_at: null },
-      { returned_at: new Date() }
+      { returned_at: new Date() },
+      {returnDocument:'after'}
     );
 
     if (!result) {
