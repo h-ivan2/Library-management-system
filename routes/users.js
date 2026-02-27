@@ -14,7 +14,7 @@ const validate=require("../middleware/validationMiddleware");
  *     summary: Create a new user
  *     tags: [Users]
  *     security:
- *      -bearerAuth: []
+ *      - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -119,7 +119,7 @@ router.get("/",authMiddleware,requireRole("admin"), getAllUsers);
  *     summary: Update a user (Admin only)
  *     tags: [Users]
  *     security:
- *       -bearerAuth: []
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
