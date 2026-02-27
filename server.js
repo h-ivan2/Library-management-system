@@ -42,7 +42,7 @@ app.use('/api/v1/borrow', borrowRoutes);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.get("/api/v1/health ",(res,req)=>{
+app.get("/api/v1/health",(req,res)=>{
     res.json({status:"ok",timestamp: new Date().toISOString()})
 
 });
