@@ -62,7 +62,7 @@ const updateBook = async (req, res) => {
     const book = await Book.findByIdAndUpdate(
       id,
       { title, author, isbn, available },
-      { new: true, runValidators: true }
+      { returnDocument:'after', runValidators: true }
     );
 
     if (!book) {
