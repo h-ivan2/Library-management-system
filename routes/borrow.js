@@ -14,7 +14,7 @@ const validate=require("../middleware/validationMiddleware");
  *     summary: Borrow a book
  *     tags: [Borrow]
  *     security:
- *       -bearerAuth: []
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
