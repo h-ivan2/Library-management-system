@@ -21,6 +21,7 @@ const borrowSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("Borrow", borrowSchema);
+const Borrow=mongoose.model("Borrow",borrowSchema);
+module.exports =Borrow;
 
 
