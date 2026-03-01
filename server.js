@@ -57,3 +57,4 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));<!-- refac
 <!-- chore: register job in server.js -->
 <!-- chore: register logger middleware in server.js -->
 <!-- chore: register health route in server.js -->
+<!-- refactor: clean up server.js imports -->
