@@ -1,5 +1,6 @@
 <!-- chore: review project structure -->
 <!-- docs: add project description to README -->
+
 <!-- chore: update README with API routes -->
 <!-- docs: document pagination query params in README -->
 <!-- docs: document borrow and return endpoints -->
@@ -20,3 +21,7 @@
 <!-- docs: document stats endpoints in README -->
 <!-- chore: final project review -->
 <!-- docs: update README with final project notes -->
+
+<!-- chore: review project structure -->
+<!-- docs: add project description to README -->
+
