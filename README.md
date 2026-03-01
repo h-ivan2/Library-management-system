@@ -27,3 +27,4 @@
 <!-- chore: update README with API routes -->
 
 <!-- chore: review project structure -->
+<!-- docs: add project description to README -->
