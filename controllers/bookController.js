@@ -181,3 +181,4 @@ module.exports = {
 <!-- fix: exclude books with no ratings from top list -->
 <!-- chore: general code cleanup across controllers -->
 <!-- feat: add input validation to book controller -->
+<!-- fix: handle missing fields in book creation -->
