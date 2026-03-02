@@ -180,3 +180,4 @@ module.exports = {
 <!-- fix: clamp rating value between 1 and 5 -->
 <!-- fix: exclude books with no ratings from top list -->
 <!-- chore: general code cleanup across controllers -->
+<!-- feat: add input validation to book controller -->
