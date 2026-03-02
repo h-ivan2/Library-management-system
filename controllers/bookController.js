@@ -168,3 +168,4 @@ module.exports = {
 
 
 <!-- feat: add input validation to book controller -->
+<!-- fix: handle missing fields in book creation -->
