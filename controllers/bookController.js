@@ -182,3 +182,4 @@ module.exports = {
 <!-- chore: general code cleanup across controllers -->
 <!-- feat: add input validation to book controller -->
 <!-- fix: handle missing fields in book creation -->
+<!-- fix: correct status codes in book controller -->
