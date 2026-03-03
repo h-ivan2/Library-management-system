@@ -8,3 +8,4 @@
 <!-- feat: add rate book endpoint -->
 <!-- feat: add top rated books endpoint -->
 <!-- feat: add total books count to stats endpoint -->
+<!-- feat: add pagination to book listing route -->
