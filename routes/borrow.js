@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { borrowBook, returnBook } = require("../controllers/borrowController");
+const { borrowBook, returnBook, getUserBorrows } = require("../controllers/borrowController");
 const authMiddleware = require('../middleware/authMiddleware');
 const {borrowRules} =require("../middleware/validationRules");
 const validate=require("../middleware/validationMiddleware");
@@ -100,6 +100,22 @@ router.post("/borrow", authMiddleware, borrowRules(),validate,borrowBook);
  *         description: Server error
  */
 router.post("/return", authMiddleware,borrowRules(),validate,returnBook);
+
+
+/**
+ * @swagger
+ * /borrow/my-books:
+ *   get:
+ *     summary: Get current user's borrowed books
+ *     tags: [Borrow]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of user's borrowed books
+ */
+router.get("/my-books", authMiddleware, getUserBorrows);
+  
 
 module.exports = router;
 
