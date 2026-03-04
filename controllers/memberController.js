@@ -7,3 +7,4 @@
 <!-- feat: implement profile handler in member controller -->
 <!-- fix: validate fields before updating member profile -->
 <!-- refactor: normalize all controller response shapes -->
+<!-- feat: add member controller with create handler -->
