@@ -22,10 +22,25 @@ const borrowBook = async (req, res) => {
       return res.status(400).json({ message: "Book already borrowed" });
     }
 
-    await Borrow.create({ userId, bookId });
+    const dueDate=new Date();
+    dueDate.setDate(dueDate.getDate() +14);
+
+    const borrow = await Borrow.create({
+      userId,
+      bookId,
+      due_date: dueDate
+    })
+  
     await Book.findByIdAndUpdate(bookId, { available: false });
 
-    res.json({ message: "Book borrowed successfully" });
+    res.json({
+       message: "Book borrowed successfully",
+       borrow:{
+        id:borrow._id,
+        borrowed_at:borrow.borrowed_at,
+        due_date:borrow.due_date
+       }
+      });
 
   } catch (error) {
     console.error(error);
@@ -44,19 +59,26 @@ const returnBook = async (req, res) => {
       });
     }
 
-    const result = await Borrow.findOneAndUpdate(
-      { userId, bookId, returned_at: null },
-      { returned_at: new Date() },
-      {returnDocument:'after'}
+    const borrow = await Borrow.findOne({
+       userId,
+        bookId, 
+        returned_at: null }
     );
 
-    if (!result) {
+    if (!borrow){
       return res.status(400).json({ message: "No borrowed record found" });
     }
 
+    const fine=borrow.calculateFine();
+    borrow.returned_at=new Date();
+    borrow.fine=fine;
+    await borrow.save();
+
     await Book.findByIdAndUpdate(bookId, { available: true });
 
-    res.json({ message: "Book returned successfully" });
+    res.json({ message: "Book returned successfully",
+    fine:fine>0 ?`Late fee :$${fine}` :"No fine"
+    });
 
   } catch (error) {
     console.error(error);
@@ -64,9 +86,37 @@ const returnBook = async (req, res) => {
   }
 };
 
+const getUserBorrows=async(req,res)=>{
+  try{
+    const userId=req.user._id;
+
+    const borrows = await Borrow.find({
+      userId,
+      returned_at: null
+    })
+    .populate('bookId')
+    .sort({ due_date: 1});
+
+     const borrowsWithStatus = borrows.map(borrow => ({
+      _id: borrow._id,
+      book: borrow.bookId,
+      borrowed_at: borrow.borrowed_at,
+      due_date: borrow.due_date,
+      isOverdue: borrow.isOverdue,
+      daysUntilDue: Math.ceil((borrow.due_date - new Date()) / (1000 * 60 * 60 * 24))
+    }));
+
+    res.json(borrowsWithStatus);
+  }catch (error){
+    console.error(error);
+    res.status(500).json({message:"Server error"});
+  }
+};
+
 module.exports = {
   borrowBook,
-  returnBook
+  returnBook,
+  getUserBorrows
 };
 
 
