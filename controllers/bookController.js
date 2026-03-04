@@ -2,8 +2,25 @@ const Book = require("../models/books");
 
 const getAllBooks = async (req, res) => {
   try {
-    const books = await Book.find();
-    res.json(books);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    const books = await Book.find()
+      .skip(skip)
+      .limit(limit)
+      .sort({ title: 1 }); // Sort by title ascending
+
+    const totalBooks = await Book.countDocuments();
+
+    res.json({
+      books,
+      currentPage: page,
+      totalPages: Math.ceil(totalBooks / limit),
+      totalBooks,
+      hasNextPage: page < Math.ceil(totalBooks / limit),
+      hasPrevPage: page > 1
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error fetching books" });
@@ -80,11 +97,73 @@ const updateBook = async (req, res) => {
   }
 };
 
+const getBookById=async(req,res) =>{
+  try{
+    const {id} =req.params;
+    const book=await Book.findById(id);
+
+    if(!book){
+      return res.status(400).json({message: "Book not found"});
+    }
+    res.json(book);
+  }catch (error){
+    console.error(error);
+    res.status(500).json({message:"Error fetching book"});
+  }
+}
+
+const searchBooks = async (req, res) => {
+  try {
+    const { query, author, isbn } = req.query;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    // Build search filter
+    let filter = {};
+    
+    if (query) {
+      filter.$or = [
+        { title: { $regex: query, $options: 'i' } },
+        { author: { $regex: query, $options: 'i' } }
+      ];
+    }
+    
+    if (author) {
+      filter.author = { $regex: author, $options: 'i' };
+    }
+    
+    if (isbn) {
+      filter.isbn = { $regex: isbn, $options: 'i' };
+    }
+
+    const books = await Book.find(filter)
+      .skip(skip)
+      .limit(limit)
+      .sort({ title: 1 });
+
+    const totalBooks = await Book.countDocuments(filter);
+
+    res.json({
+      books,
+      currentPage: page,
+      totalPages: Math.ceil(totalBooks / limit),
+      totalBooks,
+      filters: { query, author, isbn }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error searching books" });
+  }
+};
+
 module.exports = {
   getAllBooks,
   createBook,
   deleteBook,
-  updateBook
+  updateBook,
+  getBookById,
+  searchBooks
 };
 
 
