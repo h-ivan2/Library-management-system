@@ -1,4 +1,4 @@
-const {body,param,query} = require('express-validator');
+const {body,param} = require('express-validator');
 
 const createUserRules= () => [
         body('name')
@@ -14,7 +14,7 @@ const createUserRules= () => [
 
         body("password")
         .notEmpty().withMessage("Password is required")
-        .isLength({min:6}).withMessage('Password must be altleast 6 characters'),
+        .isLength({min:6}).withMessage('Password must be at least 6 characters'), // Fixed typo
 
         body('role')
         .optional()
@@ -29,7 +29,7 @@ const createUserRules= () => [
          body("name")
          .optional()
          .trim()
-         .isLength({min :2 ,max :50}).withMessage("Name must be between 2 and 5o characters"),
+         .isLength({min :2 ,max :50}).withMessage("Name must be between 2 and 50 characters"), // Fixed "5o" to "50"
 
          body("email")
          .optional()
@@ -42,25 +42,22 @@ const createUserRules= () => [
          .isIn(["user","admin"]).withMessage("Role must be 'user' or 'admin'")
     ];
 
-
-
 //Book validation 
-
 const createBookRules =() =>[
     body("title")
     .trim()
     .notEmpty().withMessage("Title is required")
-    .isLength({max:200}).withMessage("TIle can not exceed 200 characters"),
+    .isLength({max:200}).withMessage("Title cannot exceed 200 characters"), // Fixed typo
 
     body("author")
     .trim()
-    .notEmpty().withMessage("Author is reqyired")
+    .notEmpty().withMessage("Author is required")
     .isLength({max:100}).withMessage("Author cannot exceed 100 characters"),
 
     body("isbn")
     .trim()
     .notEmpty().withMessage("ISBN is required")
-    .matches(/^[\d\-]{10,20}$/).withMessage("ISBN must be 10-20 characters(hyphen allowed)")
+    .matches(/^[\d\-]{10,20}$/).withMessage("ISBN must be 10-20 characters (hyphen allowed)")
 
 ];
 
@@ -80,7 +77,7 @@ const updateBookRules = () =>[
 
     body("isbn")
     .optional()
-    .matches(/^[\d\-]{10,20}$/).withMessage("ISBN must be 10-20 digits (hyphens allowed"),
+    .matches(/^[\d\-]{10,20}$/).withMessage("ISBN must be 10-20 digits (hyphens allowed)"), // Fixed missing parenthesis
 
     body("available")
     .optional()
@@ -88,7 +85,6 @@ const updateBookRules = () =>[
 ];
 
 //Borrow validation
-
 const borrowRules =() =>[
     body("userId")
     .notEmpty().withMessage("UserId is required")
@@ -96,7 +92,7 @@ const borrowRules =() =>[
 
     body("bookId")
     .notEmpty().withMessage("bookId is required")
-    .isMongoId().withMessage("bookId must be a valid MondoDB ID")
+    .isMongoId().withMessage("bookId must be a valid MongoDB ID") // Fixed "MondoDB" to "MongoDB"
 ];
 
 const loginRules =() =>[
