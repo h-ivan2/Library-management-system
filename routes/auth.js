@@ -3,6 +3,7 @@ const router = express.Router();
 const { loginUser ,logoutUser} = require("../controllers/authController");
 const {loginRules}=require("../middleware/validationRules")
 const validate=require("../middleware/validationMiddleware")
+const {limiter,loginLimiter}=require("../middleware/rateLimiter");
 
 /**
  * @swagger
@@ -43,7 +44,7 @@ const validate=require("../middleware/validationMiddleware")
  *       500:
  *         description: Server error
  */
-router.post("/login",loginRules(),validate, loginUser);
+router.post("/login", loginLimiter ,loginRules(),validate, loginUser);
 
 /**
  * @swagger
