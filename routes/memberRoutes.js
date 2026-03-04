@@ -4,3 +4,4 @@
 <!-- fix: protect profile route with auth middleware -->
 <!-- feat: add update member profile endpoint -->
 <!-- feat: add total members count to stats endpoint -->
+<!-- feat: add member registration route -->
