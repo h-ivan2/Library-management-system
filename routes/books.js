@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getAllBooks, createBook, deleteBook, updateBook } = require("../controllers/bookController");
+const { getAllBooks, createBook, deleteBook, updateBook, searchBooks, getBookById} =require("../controllers/bookController");
 const authMiddleware = require("../middleware/authMiddleware");
 const requireRole = require("../middleware/roleMiddleware");
 const { createBookRules, updateBookRules } = require("../middleware/validationRules");
@@ -10,19 +10,139 @@ const validate = require("../middleware/validationMiddleware");
  * @swagger
  * /books:
  *   get:
- *     summary: Get all books
+ *     summary: Get all books with pagination
  *     tags: [Books]
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 100
+ *           default: 10
+ *         description: Number of items per page
  *     responses:
  *       200:
- *         description: List of all books
+ *         description: List of all books with pagination info
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 books:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                 currentPage:
+ *                   type: integer
+ *                 totalPages:
+ *                   type: integer
+ *                 totalBooks:
+ *                   type: integer
+ *                 hasNextPage:
+ *                   type: boolean
+ *                 hasPrevPage:
+ *                   type: boolean
  *       401:
  *         description: Unauthorized
  *       500:
  *         description: Server error
  */
 router.get("/", authMiddleware, getAllBooks);
+
+/**
+ * @swagger
+ * /books/search:
+ *   get:
+ *     summary: Search books with filters and pagination
+ *     tags: [Books]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         schema:
+ *           type: string
+ *         description: Search by title or author (case insensitive)
+ *       - in: query
+ *         name: author
+ *         schema:
+ *           type: string
+ *         description: Filter by specific author
+ *       - in: query
+ *         name: isbn
+ *         schema:
+ *           type: string
+ *         description: Filter by ISBN
+ *       - in: query
+ *         name: available
+ *         schema:
+ *           type: boolean
+ *         description: Filter by availability
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 100
+ *           default: 10
+ *         description: Number of items per page
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *           enum: [title, author, createdAt]
+ *           default: title
+ *         description: Sort field
+ *       - in: query
+ *         name: sortOrder
+ *         schema:
+ *           type: string
+ *           enum: [asc, desc]
+ *           default: asc
+ *         description: Sort order
+ *     responses:
+ *       200:
+ *         description: Search results with pagination
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 books:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                 currentPage:
+ *                   type: integer
+ *                 totalPages:
+ *                   type: integer
+ *                 totalBooks:
+ *                   type: integer
+ *                 filters:
+ *                   type: object
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Server error
+ */
+router.get("/search", authMiddleware, searchBooks);
 
 /**
  * @swagger
@@ -65,6 +185,33 @@ router.get("/", authMiddleware, getAllBooks);
  *         description: Server error
  */
 router.post("/", authMiddleware, requireRole("admin"), createBookRules(), validate, createBook);
+
+/**
+ * @swagger
+ * /books/{id}:
+ *   get:
+ *     summary: Get a book by ID
+ *     tags: [Books]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Book ID
+ *     responses:
+ *       200:
+ *         description: Book details
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Book not found
+ *       500:
+ *         description: Server error
+ */
+router.get("/:id", authMiddleware, getBookById); // You'll need to import this
 
 /**
  * @swagger
