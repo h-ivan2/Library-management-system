@@ -133,3 +133,4 @@ module.exports = {
 <!-- fix: return 400 when member exceeds borrow limit -->
 <!-- feat: add active borrows count to stats endpoint -->
 <!-- fix: edge case handling in borrow controller -->
+<!-- feat: add borrow controller -->
