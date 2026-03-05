@@ -134,3 +134,4 @@ module.exports = {
 <!-- feat: add active borrows count to stats endpoint -->
 <!-- fix: edge case handling in borrow controller -->
 <!-- feat: add borrow controller -->
+<!-- fix: check book availability before borrowing -->
