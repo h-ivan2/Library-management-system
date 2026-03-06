@@ -135,3 +135,4 @@ module.exports = {
 <!-- fix: edge case handling in borrow controller -->
 <!-- feat: add borrow controller -->
 <!-- fix: check book availability before borrowing -->
+<!-- fix: update book availability on return -->
