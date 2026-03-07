@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/h-ivan2/Library-management-system#readme",
   "dependencies": {
+    "@headlessui/react": "^2.2.9",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
