@@ -31,3 +31,4 @@
 <!-- chore: update README with API routes -->
 <!-- docs: document pagination query params in README -->
 <!-- docs: document borrow and return endpoints -->
+<!-- docs: update README with overdue endpoint -->
