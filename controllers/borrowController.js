@@ -123,3 +123,4 @@ module.exports = {
 <!-- feat: add borrow controller -->
 <!-- fix: check book availability before borrowing -->
 <!-- fix: update book availability on return -->
+<!-- fix: filter only active borrows for overdue check -->
