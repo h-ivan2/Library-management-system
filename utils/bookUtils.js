@@ -4,3 +4,4 @@
 <!-- refactor: extract rating aggregation to utils -->
 <!-- refactor: clean up utils folder -->
 <!-- refactor: extract availability check to utils -->
+<!-- feat: add overdue detection logic -->
