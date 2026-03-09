@@ -137,3 +137,4 @@ module.exports = {
 <!-- fix: check book availability before borrowing -->
 <!-- fix: update book availability on return -->
 <!-- fix: filter only active borrows for overdue check -->
+<!-- feat: attach fine amount to borrow record on return -->
