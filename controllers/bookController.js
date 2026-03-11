@@ -184,3 +184,4 @@ module.exports = {
 <!-- fix: handle missing fields in book creation -->
 <!-- fix: correct status codes in book controller -->
 <!-- feat: implement title search in book controller -->
+<!-- fix: make book title search case insensitive -->
