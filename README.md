@@ -33,3 +33,4 @@
 <!-- docs: document borrow and return endpoints -->
 <!-- docs: update README with overdue endpoint -->
 <!-- docs: document fine calculation logic -->
+<!-- docs: add search endpoint to README -->
