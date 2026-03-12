@@ -185,3 +185,4 @@ module.exports = {
 <!-- fix: correct status codes in book controller -->
 <!-- feat: implement title search in book controller -->
 <!-- fix: make book title search case insensitive -->
+<!-- fix: handle no results gracefully in search -->
