@@ -34,3 +34,4 @@
 <!-- docs: update README with overdue endpoint -->
 <!-- docs: document fine calculation logic -->
 <!-- docs: add search endpoint to README -->
+<!-- docs: document auth requirement in README -->
