@@ -12,3 +12,4 @@
 <!-- feat: implement login handler in member controller -->
 <!-- fix: hash password before saving member -->
 <!-- feat: generate JWT on successful login -->
+<!-- fix: set JWT expiry to 7 days -->
