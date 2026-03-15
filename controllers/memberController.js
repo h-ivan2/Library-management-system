@@ -11,3 +11,4 @@
 <!-- fix: validate member email on registration -->
 <!-- feat: implement login handler in member controller -->
 <!-- fix: hash password before saving member -->
+<!-- feat: generate JWT on successful login -->
