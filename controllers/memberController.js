@@ -4,3 +4,4 @@
 <!-- fix: hash password before saving member -->
 <!-- feat: generate JWT on successful login -->
 <!-- fix: set JWT expiry to 7 days -->
+<!-- feat: implement profile handler in member controller -->
