@@ -8,3 +8,4 @@
 <!-- docs: add search endpoint to README -->
 <!-- docs: document auth requirement in README -->
 <!-- docs: document login endpoint and JWT usage -->
+<!-- docs: update README with member endpoints -->
