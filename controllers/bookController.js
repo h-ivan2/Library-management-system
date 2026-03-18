@@ -187,3 +187,4 @@ module.exports = {
 <!-- fix: make book title search case insensitive -->
 <!-- fix: handle no results gracefully in search -->
 <!-- chore: clean up unused imports in book controller -->
+<!-- fix: prevent deleting book with active borrows -->
