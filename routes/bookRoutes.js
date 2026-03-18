@@ -12,3 +12,4 @@
 <!-- feat: add search books by title endpoint -->
 <!-- feat: add search books by author endpoint -->
 <!-- refactor: merge title and author search into one route -->
+<!-- feat: add delete book endpoint -->
