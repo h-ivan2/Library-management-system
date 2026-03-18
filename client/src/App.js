@@ -4,59 +4,31 @@ import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
-import Layout from './components/Layout';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import Books from './pages/Books';
-import Users from './pages/Users';
-import Profile from './pages/Profile';
-import Borrow from './pages/Borrow';
-import BookDetails from './pages/BookDetails';
-import Settings from './pages/Settings';
-import Reports from './pages/Reports';
+
+// Simple components for testing
+const Books = () => <div className="p-8"><h1 className="text-2xl font-bold">Books Page</h1></div>;
+const Borrow = () => <div className="p-8"><h1 className="text-2xl font-bold">Borrow Page</h1></div>;
+const Profile = () => <div className="p-8"><h1 className="text-2xl font-bold">Profile Page</h1></div>;
+const Users = () => <div className="p-8"><h1 className="text-2xl font-bold">Users Page (Admin Only)</h1></div>;
 
 function App() {
   return (
     <Router>
       <AuthProvider>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
-            <Route index element={<Dashboard />} />
-            <Route path="books" element={<Books />} />
-            <Route path="books/:id" element={<BookDetails />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="borrow" element={<Borrow />} />
-            <Route path="users" element={<AdminRoute><Users /></AdminRoute>} />
-            <Route path="settings" element={<AdminRoute><Settings /></AdminRoute>} />
-            <Route path="reports" element={<AdminRoute><Reports /></AdminRoute>} />
-          </Route>
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-        <Toaster 
-          position="top-right"
-          toastOptions={{
-            duration: 4000,
-            style: {
-              background: '#363636',
-              color: '#fff',
-            },
-            success: {
-              duration: 3000,
-              iconTheme: {
-                primary: '#10b981',
-                secondary: '#fff',
-              },
-            },
-            error: {
-              duration: 4000,
-              iconTheme: {
-                primary: '#ef4444',
-                secondary: '#fff',
-              },
-            },
-          }}
-        />
+        <div className="min-h-screen bg-gray-50">
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+            <Route path="/books" element={<PrivateRoute><Books /></PrivateRoute>} />
+            <Route path="/borrow" element={<PrivateRoute><Borrow /></PrivateRoute>} />
+            <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+            <Route path="/users" element={<AdminRoute><Users /></AdminRoute>} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+          <Toaster position="top-right" />
+        </div>
       </AuthProvider>
     </Router>
   );
