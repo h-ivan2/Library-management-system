@@ -3,3 +3,4 @@
 <!-- feat: add search books by author endpoint -->
 <!-- refactor: merge title and author search into one route -->
 <!-- feat: add delete book endpoint -->
+<!-- feat: add update book details endpoint -->
