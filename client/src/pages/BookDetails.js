@@ -59,7 +59,7 @@ const BookDetails = () => {
     try {
       await axios.post('/borrow/borrow', {
         userId: user.id,
-        bookId: book._id
+        bookId: book._id || book.id
       });
       toast.success('Book borrowed successfully!');
       fetchBookDetails();
@@ -73,7 +73,7 @@ const BookDetails = () => {
   const handleEdit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/books/${book._id}`, editFormData);
+      await axios.put(`/books/${book._id || book.id}`, editFormData);
       toast.success('Book updated successfully');
       setShowEditModal(false);
       fetchBookDetails();
@@ -84,7 +84,7 @@ const BookDetails = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/books/${book._id}`);
+      await axios.delete(`/books/${book._id || book.id}`);
       toast.success('Book deleted successfully');
       navigate('/books');
     } catch (error) {
@@ -114,7 +114,7 @@ const BookDetails = () => {
       </button>
 
       {/* Book Details Card */}
-      <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-800 px-8 py-6">
           <div className="flex justify-between items-start">
@@ -194,14 +194,14 @@ const BookDetails = () => {
           {/* Additional Info */}
           <div className="border-t border-gray-200 pt-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Additional Information</h3>
-            <div className="bg-gray-50 rounded-lg p-4">
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm text-gray-600">Book ID</p>
-                  <p className="font-mono text-sm text-gray-900">{book._id}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Book ID</p>
+                  <p className="font-mono text-sm text-gray-900">{book._id || book.id}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Status</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Status</p>
                   <p className={`font-medium ${book.available ? 'text-green-600' : 'text-red-600'}`}>
                     {book.available ? 'Available' : 'Borrowed'}
                   </p>
@@ -211,7 +211,17 @@ const BookDetails = () => {
           </div>
 
           {/* Action Buttons */}
-          {book.available && (
+          {isAdmin && (
+            <div className="border-t pt-6 mt-6">
+              <div className="flex items-center space-x-3 p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                <div className="p-2 bg-purple-100 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+                </div>
+                <p className="text-sm text-purple-800">Administrators cannot borrow books. Use a regular user account to borrow.</p>
+              </div>
+            </div>
+          )}
+          {book.available && !isAdmin && (
             <div className="border-t pt-6 mt-6">
               <button
                 onClick={handleBorrow}
@@ -238,12 +248,12 @@ const BookDetails = () => {
       {/* Edit Modal */}
       {showEditModal && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex items-center justify-center">
-          <div className="relative bg-white rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Edit Book</h3>
+          <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Edit Book</h3>
             <form onSubmit={handleEdit}>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Title *
                   </label>
                   <input
@@ -255,7 +265,7 @@ const BookDetails = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Author *
                   </label>
                   <input
@@ -267,7 +277,7 @@ const BookDetails = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     ISBN *
                   </label>
                   <input
@@ -279,7 +289,7 @@ const BookDetails = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Availability
                   </label>
                   <select
@@ -315,7 +325,7 @@ const BookDetails = () => {
       {/* Delete Confirmation Modal */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex items-center justify-center">
-          <div className="relative bg-white rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
+          <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
             <h3 className="text-xl font-bold text-gray-900 mb-4">Delete Book</h3>
             <p className="text-gray-600 mb-6">
               Are you sure you want to delete "<span className="font-semibold">{book.title}</span>"? 
@@ -348,7 +358,7 @@ const DetailField = ({ icon: Icon, label, value, isMono }) => (
       <Icon className="h-5 w-5 text-primary-600" />
     </div>
     <div className="flex-1 min-w-0">
-      <p className="text-sm text-gray-600">{label}</p>
+      <p className="text-sm text-gray-600 dark:text-gray-400">{label}</p>
       <p className={`font-medium text-gray-900 truncate ${isMono ? 'font-mono text-sm' : ''}`}>
         {value}
       </p>
