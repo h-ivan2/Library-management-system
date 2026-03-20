@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useAuth } from '../contexts/AuthContext';
-import { 
+import {
   UserCircleIcon,
   EnvelopeIcon,
   CalendarIcon,
@@ -15,7 +15,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 const Profile = () => {
-  const { user, login } = useAuth();
+  const { user, fetchUser } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: user?.name || '',
@@ -52,8 +52,8 @@ const Profile = () => {
       await axios.put('/profile/me', formData);
       toast.success('Profile updated successfully');
       setIsEditing(false);
-      // Refresh user data by logging in again (this will trigger fetchUser in AuthContext)
-      await login(user.email, '');
+      // Refresh user data from the server using the auth token
+      await fetchUser();
     } catch (error) {
       toast.error(error.response?.data?.message || 'Failed to update profile');
     } finally {
@@ -111,7 +111,7 @@ const Profile = () => {
           // View Mode
           <div className="space-y-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold text-gray-900">Profile Information</h2>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">Profile Information</h2>
               <button
                 onClick={() => setIsEditing(true)}
                 className="flex items-center space-x-2 text-primary-600 hover:text-primary-700 transition-colors"
@@ -122,22 +122,9 @@ const Profile = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <InfoField
-                icon={UserCircleIcon}
-                label="Full Name"
-                value={user?.name}
-              />
-              <InfoField
-                icon={EnvelopeIcon}
-                label="Email Address"
-                value={user?.email}
-              />
-              <InfoField
-                icon={IdentificationIcon}
-                label="User ID"
-                value={user?.id}
-                isMono
-              />
+              <InfoField icon={UserCircleIcon} label="Full Name" value={user?.name} />
+              <InfoField icon={EnvelopeIcon} label="Email Address" value={user?.email} />
+              <InfoField icon={IdentificationIcon} label="User ID" value={user?.id} isMono />
               <InfoField
                 icon={CalendarIcon}
                 label="Member Since"
@@ -166,11 +153,11 @@ const Profile = () => {
                   ) : (
                     <div className="space-y-4">
                       {borrowHistory.map((borrow) => (
-                        <div key={borrow._id} className="bg-gray-50 rounded-lg p-4">
+                        <div key={borrow._id} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
                           <div className="flex justify-between items-start">
                             <div>
-                              <h4 className="font-semibold text-gray-900">{borrow.book?.title}</h4>
-                              <p className="text-sm text-gray-600">by {borrow.book?.author}</p>
+                              <h4 className="font-semibold text-gray-900 dark:text-white">{borrow.book?.title}</h4>
+                              <p className="text-sm text-gray-600 dark:text-gray-400">by {borrow.book?.author}</p>
                             </div>
                             {borrow.returned_at ? (
                               <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">
@@ -203,11 +190,11 @@ const Profile = () => {
         ) : (
           // Edit Mode
           <form onSubmit={handleSubmit} className="space-y-6">
-            <h2 className="text-xl font-bold text-gray-900">Edit Profile</h2>
-            
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Edit Profile</h2>
+
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Full Name
                 </label>
                 <input
@@ -221,7 +208,7 @@ const Profile = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Email Address
                 </label>
                 <input
@@ -253,7 +240,7 @@ const Profile = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="btn-primary flex items-center space-x-2"
+                className="btn-primary flex items-center space-x-2 disabled:opacity-50"
               >
                 <CheckIcon className="h-5 w-5" />
                 <span>{loading ? 'Saving...' : 'Save Changes'}</span>
@@ -272,7 +259,7 @@ const InfoField = ({ icon: Icon, label, value, isMono }) => (
       <Icon className="h-5 w-5 text-primary-600" />
     </div>
     <div className="flex-1 min-w-0">
-      <p className="text-sm text-gray-600">{label}</p>
+      <p className="text-sm text-gray-600 dark:text-gray-400">{label}</p>
       <p className={`font-medium text-gray-900 truncate ${isMono ? 'font-mono text-sm' : ''}`}>
         {value}
       </p>
