@@ -126,3 +126,4 @@ module.exports = {
 <!-- fix: filter only active borrows for overdue check -->
 <!-- feat: attach fine amount to borrow record on return -->
 <!-- feat: implement borrow history in borrow controller -->
+<!-- fix: sort borrow history by most recent first -->
