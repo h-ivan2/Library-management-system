@@ -8,7 +8,6 @@ import {
   UserGroupIcon,
   ChartBarIcon,
   Cog6ToothIcon,
-  UserCircleIcon,
   ArrowRightOnRectangleIcon,
   XMarkIcon,
   SunIcon,
@@ -18,11 +17,12 @@ import {
 const Sidebar = ({ isOpen, onClose, darkMode, toggleDarkMode }) => {
   const { user, isAdmin, logout } = useAuth();
 
-  // Define navigation items
+  // Define navigation items - My Borrows only for regular users
   const navigation = [
     { name: 'Dashboard', to: '/', icon: HomeIcon },
     { name: 'Books', to: '/books', icon: BookOpenIcon },
-    { name: 'My Borrows', to: '/borrow', icon: BookmarkIcon }
+    ...(!isAdmin ? [{ name: 'My Borrows', to: '/borrow', icon: BookmarkIcon }] : []),
+    ...(!isAdmin ? [{ name: 'Settings', to: '/settings', icon: Cog6ToothIcon }] : [])
   ];
 
   // Admin only navigation items
