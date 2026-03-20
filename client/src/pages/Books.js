@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -152,8 +151,8 @@ const Books = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Books Collection</h1>
-          <p className="text-gray-600 mt-1">Total {totalBooks} books available</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Books Collection</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">Total {totalBooks} books available</p>
         </div>
         {isAdmin && (
           <button
@@ -171,7 +170,7 @@ const Books = () => {
       </div>
 
       {/* Search Bar */}
-      <div className="bg-white rounded-lg shadow-md p-4 mb-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 mb-6">
         <form onSubmit={handleSearch} className="space-y-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
@@ -214,7 +213,7 @@ const Books = () => {
           {showFilters && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Author
                 </label>
                 <input
@@ -226,7 +225,7 @@ const Books = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   ISBN
                 </label>
                 <input
@@ -246,15 +245,15 @@ const Books = () => {
       {books.length === 0 ? (
         <div className="text-center py-12 bg-white rounded-lg shadow">
           <BookOpenIcon className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-xl font-medium text-gray-900 mb-2">No books found</h3>
-          <p className="text-gray-600">Try adjusting your search or add new books.</p>
+          <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2">No books found</h3>
+          <p className="text-gray-600 dark:text-gray-400">Try adjusting your search or add new books.</p>
         </div>
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {books.map((book) => (
-              <div key={book._id} className="card group">
-                <Link to={`/books/${book._id}`} className="block p-6">
+              <div key={book._id || book.id} className="card group">
+                <Link to={`/books/${book._id || book.id}`} className="block p-6">
                   <div className="flex justify-between items-start mb-4">
                     <span className={`px-2 py-1 text-xs font-semibold rounded ${
                       book.available 
@@ -292,10 +291,10 @@ const Books = () => {
                       </div>
                     )}
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors line-clamp-2">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary-600 transition-colors line-clamp-2">
                     {book.title}
                   </h3>
-                  <p className="text-gray-600 mb-2">by {book.author}</p>
+                  <p className="text-gray-600 dark:text-gray-400 mb-2">by {book.author}</p>
                   <p className="text-sm text-gray-500 font-mono">ISBN: {book.isbn}</p>
                 </Link>
               </div>
@@ -312,7 +311,7 @@ const Books = () => {
               >
                 <ChevronLeftIcon className="h-5 w-5" />
               </button>
-              <span className="text-gray-700">
+              <span className="text-gray-700 dark:text-gray-300">
                 Page {currentPage} of {totalPages}
               </span>
               <button
@@ -330,15 +329,15 @@ const Books = () => {
       {/* Add/Edit Book Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex items-center justify-center">
-          <div className="relative bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
+          <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md mx-4">
             <div className="p-6">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 {editingBook ? 'Edit Book' : 'Add New Book'}
               </h3>
               <form onSubmit={handleSubmit}>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Title *
                     </label>
                     <input
@@ -351,7 +350,7 @@ const Books = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Author *
                     </label>
                     <input
@@ -364,7 +363,7 @@ const Books = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       ISBN *
                     </label>
                     <input
