@@ -9,24 +9,26 @@ const Layout = () => {
   const { darkMode, toggleDarkMode } = useDarkMode();
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <Sidebar 
-        isOpen={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-        darkMode={darkMode}
-        toggleDarkMode={toggleDarkMode}
-      />
-      
-      <div className="lg:pl-64">
-        <TopBar 
-          onMenuClick={() => setSidebarOpen(true)}
+    <div className={darkMode ? 'dark' : ''}>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <Sidebar
+          isOpen={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
         />
-        
-        <main className="p-6">
-          <Outlet />
-        </main>
+
+        <div className="lg:pl-64">
+          <TopBar
+            onMenuClick={() => setSidebarOpen(true)}
+            darkMode={darkMode}
+            toggleDarkMode={toggleDarkMode}
+          />
+
+          <main className="p-6">
+            <Outlet />
+          </main>
+        </div>
       </div>
     </div>
   );
