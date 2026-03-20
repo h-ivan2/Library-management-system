@@ -138,3 +138,4 @@ module.exports = {
 <!-- fix: update book availability on return -->
 <!-- fix: filter only active borrows for overdue check -->
 <!-- feat: attach fine amount to borrow record on return -->
+<!-- feat: implement borrow history in borrow controller -->
