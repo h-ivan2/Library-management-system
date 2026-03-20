@@ -8,7 +8,8 @@ import {
   ClockIcon,
   ExclamationTriangleIcon,
   CheckCircleIcon,
-  CalendarIcon
+  CalendarIcon,
+  ShieldCheckIcon
 } from '@heroicons/react/24/outline';
 
 const Borrow = () => {
@@ -18,7 +19,7 @@ const Borrow = () => {
   const [selectedBook, setSelectedBook] = useState(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [actionLoading, setActionLoading] = useState(false);
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -115,12 +116,28 @@ const Borrow = () => {
     );
   }
 
+  // Block admins from this page entirely
+  if (isAdmin) {
+    return (
+      <div className="flex flex-col items-center justify-center h-96 bg-white rounded-2xl shadow-md">
+        <div className="p-4 bg-purple-100 rounded-full mb-4">
+          <ShieldCheckIcon className="h-12 w-12 text-purple-600" />
+        </div>
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">Admin Account</h2>
+        <p className="text-gray-600 text-center max-w-md">
+          Administrators manage the library system and cannot borrow books.
+          Use a regular user account to borrow books.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Borrow Books</h1>
-        <p className="text-gray-600 mt-1">Browse available books and manage your borrowings</p>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Borrow Books</h1>
+        <p className="text-gray-600 dark:text-gray-400 mt-1">Browse available books and manage your borrowings</p>
       </div>
 
       {/* My Borrowed Books Section */}
@@ -137,7 +154,7 @@ const Borrow = () => {
               const book = borrow.book;
               
               return (
-                <div key={borrow._id} className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div key={borrow._id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-3">
                       <span className={`px-2 py-1 text-xs font-semibold rounded ${status.bg} ${status.color} flex items-center`}>
@@ -145,10 +162,10 @@ const Borrow = () => {
                         {status.text}
                       </span>
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2 line-clamp-1">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 line-clamp-1">
                       {book?.title || 'Unknown Book'}
                     </h3>
-                    <p className="text-gray-600 mb-3">by {book?.author || 'Unknown Author'}</p>
+                    <p className="text-gray-600 dark:text-gray-400 mb-3">by {book?.author || 'Unknown Author'}</p>
                     
                     <div className="space-y-2 mb-4">
                       <div className="flex items-center text-sm text-gray-500">
@@ -186,16 +203,16 @@ const Borrow = () => {
         {availableBooks.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-lg shadow">
             <BookOpenIcon className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-medium text-gray-900 mb-2">No books available</h3>
-            <p className="text-gray-600">All books are currently borrowed. Check back later!</p>
+            <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2">No books available</h3>
+            <p className="text-gray-600 dark:text-gray-400">All books are currently borrowed. Check back later!</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {availableBooks.map((book) => (
-              <div key={book._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+              <div key={book._id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2 line-clamp-1">{book.title}</h3>
-                  <p className="text-gray-600 mb-4">by {book.author}</p>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 line-clamp-1">{book.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">by {book.author}</p>
                   <p className="text-sm text-gray-500 mb-4 font-mono">ISBN: {book.isbn}</p>
                   <button
                     onClick={() => {
@@ -216,8 +233,8 @@ const Borrow = () => {
       {/* Confirmation Modal */}
       {showConfirmModal && selectedBook && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex items-center justify-center">
-          <div className="relative bg-white rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Confirm Borrow</h3>
+          <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Confirm Borrow</h3>
             <p className="text-gray-600 mb-6">
               Are you sure you want to borrow "<span className="font-semibold">{selectedBook.title}</span>"?
               <br /><br />
