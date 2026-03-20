@@ -4,31 +4,57 @@ import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
+import Layout from './components/Layout';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-
-// Simple components for testing
-const Books = () => <div className="p-8"><h1 className="text-2xl font-bold">Books Page</h1></div>;
-const Borrow = () => <div className="p-8"><h1 className="text-2xl font-bold">Borrow Page</h1></div>;
-const Profile = () => <div className="p-8"><h1 className="text-2xl font-bold">Profile Page</h1></div>;
-const Users = () => <div className="p-8"><h1 className="text-2xl font-bold">Users Page (Admin Only)</h1></div>;
+import Books from './pages/Books';
+import BookDetails from './pages/BookDetails';
+import Borrow from './pages/Borrow';
+import Profile from './pages/Profile';
+import Users from './pages/Users';
+import Reports from './pages/Reports';
+import Settings from './pages/Settings';
 
 function App() {
   return (
     <Router>
       <AuthProvider>
-        <div className="min-h-screen bg-gray-50">
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-            <Route path="/books" element={<PrivateRoute><Books /></PrivateRoute>} />
-            <Route path="/borrow" element={<PrivateRoute><Borrow /></PrivateRoute>} />
-            <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
-            <Route path="/users" element={<AdminRoute><Users /></AdminRoute>} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-          <Toaster position="top-right" />
-        </div>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Layout />
+              </PrivateRoute>
+            }
+          >
+            <Route index element={<Dashboard />} />
+            <Route path="books" element={<Books />} />
+            <Route path="books/:id" element={<BookDetails />} />
+            <Route path="borrow" element={<Borrow />} />
+            <Route path="profile" element={<Profile />} />
+            <Route
+              path="users"
+              element={
+                <AdminRoute>
+                  <Users />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="reports"
+              element={
+                <AdminRoute>
+                  <Reports />
+                </AdminRoute>
+              }
+            />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+        <Toaster position="top-right" />
       </AuthProvider>
     </Router>
   );
