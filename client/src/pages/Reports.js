@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { 
   DocumentArrowDownIcon,
@@ -14,21 +14,21 @@ const Reports = () => {
   const [reportData, setReportData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchReportData();
-  }, [dateRange]);
-
-  const fetchReportData = async () => {
+  const fetchReportData = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await axios.get('/statistics/dashboard');
+      const response = await axios.get(`/statistics/dashboard?range=${dateRange}`);
       setReportData(response.data);
     } catch (error) {
       console.error('Failed to fetch report data:', error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [dateRange]);
+
+  useEffect(() => {
+    fetchReportData();
+  }, [fetchReportData]);
 
   const stats = [
     { 
@@ -63,6 +63,15 @@ const Reports = () => {
 
   return (
     <div>
+      {/* Loading spinner */}
+      {loading && (
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        </div>
+      )}
+
+      {!loading && (
+      <div>
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between">
@@ -194,6 +203,8 @@ const Reports = () => {
           </div>
         </div>
       </div>
+    </div>
+      )}
     </div>
   );
 };
