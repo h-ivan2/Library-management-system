@@ -10,3 +10,4 @@
 <!-- docs: document login endpoint and JWT usage -->
 <!-- docs: update README with member endpoints -->
 <!-- docs: document delete book endpoint -->
+<!-- docs: add borrow history endpoint to README -->
