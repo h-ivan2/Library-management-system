@@ -192,9 +192,9 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Recent Books */}
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold text-gray-900">Recent Books</h2>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">Recent Books</h2>
               <Link to="/books" className="text-primary-600 hover:text-primary-700 font-medium flex items-center">
                 View All <ChevronRightIcon className="h-4 w-4 ml-1" />
               </Link>
@@ -208,9 +208,9 @@ const Dashboard = () => {
                   <Link
                     key={book._id}
                     to={`/books/${book._id}`}
-                    className="block p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:shadow-md transition-all"
+                    className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-primary-300 hover:shadow-md transition-all dark:bg-gray-700"
                   >
-                    <h3 className="font-semibold text-gray-900 mb-1 line-clamp-1">{book.title}</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-1 line-clamp-1">{book.title}</h3>
                     <p className="text-sm text-gray-600 mb-2">by {book.author}</p>
                     <span className={`text-xs px-2 py-1 rounded ${
                       book.available 
@@ -228,9 +228,9 @@ const Dashboard = () => {
 
         {/* My Borrows */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold text-gray-900">My Borrows</h2>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">My Borrows</h2>
               <Link to="/borrow" className="text-primary-600 hover:text-primary-700 font-medium flex items-center">
                 View All <ChevronRightIcon className="h-4 w-4 ml-1" />
               </Link>
@@ -239,7 +239,7 @@ const Dashboard = () => {
             {myBorrows.length === 0 ? (
               <div className="text-center py-8">
                 <BookmarkIcon className="h-12 w-12 text-gray-400 mx-auto mb-3" />
-                <p className="text-gray-600">No books borrowed</p>
+                <p className="text-gray-600 dark:text-gray-400">No books borrowed</p>
                 <Link to="/books" className="btn-primary inline-block mt-4">
                   Browse Books
                 </Link>
@@ -251,12 +251,12 @@ const Dashboard = () => {
                   const StatusIcon = status.icon;
                   
                   return (
-                    <div key={borrow._id} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
-                      <h3 className="font-semibold text-gray-900 mb-1 line-clamp-1">
+                    <div key={borrow._id} className="border-b border-gray-100 dark:border-gray-700 last:border-0 pb-4 last:pb-0">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-1 line-clamp-1">
                         {borrow.book?.title || 'Unknown Book'}
                       </h3>
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-600">
+                        <span className="text-gray-600 dark:text-gray-400">
                           Due: {new Date(borrow.due_date).toLocaleDateString()}
                         </span>
                         <span className={`px-2 py-1 rounded text-xs flex items-center ${status.bg} ${status.color}`}>
@@ -275,17 +275,17 @@ const Dashboard = () => {
 
       {/* Admin: Most Borrowed Books */}
       {isAdmin && stats?.mostBorrowed?.length > 0 && (
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Most Borrowed Books</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Most Borrowed Books</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {stats.mostBorrowed.map((item, index) => (
-              <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+              <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                 <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-bold">
                   {index + 1}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-gray-900 truncate">{item.book?.title || 'Unknown'}</p>
-                  <p className="text-sm text-gray-600">Borrowed {item.count} times</p>
+                  <p className="font-medium text-gray-900 dark:text-white truncate">{item.book?.title || 'Unknown'}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Borrowed {item.count} times</p>
                 </div>
               </div>
             ))}
@@ -307,14 +307,14 @@ const StatCard = ({ icon: Icon, label, value, color }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
       <div className="flex items-center">
         <div className={`p-3 rounded-lg ${colorClasses[color]}`}>
           <Icon className="h-6 w-6" />
         </div>
         <div className="ml-4">
           <p className="text-sm font-medium text-gray-600">{label}</p>
-          <p className="text-2xl font-semibold text-gray-900">{value}</p>
+          <p className="text-2xl font-semibold text-gray-900 dark:text-white">{value}</p>
         </div>
       </div>
     </div>
