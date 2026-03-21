@@ -11,3 +11,4 @@
 <!-- docs: update README with member endpoints -->
 <!-- docs: document delete book endpoint -->
 <!-- docs: add borrow history endpoint to README -->
+<!-- docs: document category filter in README -->
