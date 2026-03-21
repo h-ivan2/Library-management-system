@@ -189,3 +189,4 @@ module.exports = {
 <!-- chore: clean up unused imports in book controller -->
 <!-- fix: prevent deleting book with active borrows -->
 <!-- fix: only allow admin to update book details -->
+<!-- fix: handle unknown category gracefully -->
