@@ -3,3 +3,4 @@
 <!-- test: verify author search returns correct results -->
 <!-- test: verify delete is blocked when book is borrowed -->
 <!-- test: verify non-admin cannot update book -->
+<!-- test: verify category filter returns correct books -->
