@@ -40,3 +40,4 @@
 <!-- docs: document delete book endpoint -->
 <!-- docs: add borrow history endpoint to README -->
 <!-- docs: document category filter in README -->
+<!-- docs: document rating endpoint in README -->
