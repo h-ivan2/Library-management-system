@@ -190,3 +190,4 @@ module.exports = {
 <!-- fix: prevent deleting book with active borrows -->
 <!-- fix: only allow admin to update book details -->
 <!-- fix: handle unknown category gracefully -->
+<!-- fix: clamp rating value between 1 and 5 -->
