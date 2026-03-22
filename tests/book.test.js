@@ -4,3 +4,4 @@
 <!-- test: verify delete is blocked when book is borrowed -->
 <!-- test: verify non-admin cannot update book -->
 <!-- test: verify category filter returns correct books -->
+<!-- test: verify rating is clamped between 1 and 5 -->
