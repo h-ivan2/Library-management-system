@@ -191,3 +191,4 @@ module.exports = {
 <!-- fix: only allow admin to update book details -->
 <!-- fix: handle unknown category gracefully -->
 <!-- fix: clamp rating value between 1 and 5 -->
+<!-- fix: exclude books with no ratings from top list -->
