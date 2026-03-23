@@ -6,3 +6,4 @@
 <!-- feat: add update book details endpoint -->
 <!-- feat: add filter books by category endpoint -->
 <!-- feat: add rate book endpoint -->
+<!-- feat: add top rated books endpoint -->
