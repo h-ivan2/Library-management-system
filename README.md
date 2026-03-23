@@ -13,3 +13,4 @@
 <!-- docs: add borrow history endpoint to README -->
 <!-- docs: document category filter in README -->
 <!-- docs: document rating endpoint in README -->
+<!-- docs: add top rated books docs to README -->
