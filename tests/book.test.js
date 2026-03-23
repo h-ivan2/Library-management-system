@@ -5,3 +5,4 @@
 <!-- test: verify non-admin cannot update book -->
 <!-- test: verify category filter returns correct books -->
 <!-- test: verify rating is clamped between 1 and 5 -->
+<!-- test: verify unrated books excluded from top list -->
