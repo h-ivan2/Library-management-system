@@ -4,3 +4,4 @@
 <!-- test: verify overdue detection logic -->
 <!-- test: verify fine is attached on overdue return -->
 <!-- test: verify borrow history is sorted correctly -->
+<!-- test: verify stock decrements and increments correctly -->
