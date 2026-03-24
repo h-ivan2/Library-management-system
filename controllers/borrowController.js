@@ -141,3 +141,4 @@ module.exports = {
 <!-- feat: implement borrow history in borrow controller -->
 <!-- fix: sort borrow history by most recent first -->
 <!-- fix: decrement stock on borrow -->
+<!-- fix: increment stock on return -->
