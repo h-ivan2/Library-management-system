@@ -56,3 +56,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));<!-- refactor: clean up server.js imports -->
 <!-- chore: register job in server.js -->
 <!-- chore: register logger middleware in server.js -->
+<!-- chore: register health route in server.js -->
