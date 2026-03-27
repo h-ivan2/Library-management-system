@@ -15,3 +15,4 @@
 <!-- docs: document rating endpoint in README -->
 <!-- docs: add top rated books docs to README -->
 <!-- docs: document borrow limit in README -->
+<!-- docs: add health check docs to README -->
