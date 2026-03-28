@@ -44,3 +44,4 @@
 <!-- docs: add top rated books docs to README -->
 <!-- docs: document borrow limit in README -->
 <!-- docs: add health check docs to README -->
+<!-- docs: final README review and polish -->
