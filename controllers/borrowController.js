@@ -144,3 +144,4 @@ module.exports = {
 <!-- fix: increment stock on return -->
 <!-- feat: add member borrow limit enforcement -->
 <!-- fix: return 400 when member exceeds borrow limit -->
+<!-- feat: add active borrows count to stats endpoint -->
