@@ -18,3 +18,4 @@
 <!-- docs: add health check docs to README -->
 <!-- docs: final README review and polish -->
 <!-- docs: document stats endpoints in README -->
+<!-- chore: final project review -->
