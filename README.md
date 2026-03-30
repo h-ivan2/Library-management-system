@@ -19,3 +19,4 @@
 <!-- docs: final README review and polish -->
 <!-- docs: document stats endpoints in README -->
 <!-- chore: final project review -->
+<!-- docs: update README with final project notes -->
