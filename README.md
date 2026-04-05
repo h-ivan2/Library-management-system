@@ -43,3 +43,4 @@ See `.env.example` for required values:
 - `JWT_SECRET`
 - `EMAIL_USER`
 - `EMAIL_PASS`
+<!-- docs: document reservation endpoints in README -->
