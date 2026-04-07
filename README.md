@@ -44,3 +44,4 @@ See `.env.example` for required values:
 - `EMAIL_USER`
 - `EMAIL_PASS`
 <!-- docs: document reservation endpoints in README -->
+<!-- docs: update README with admin reservation endpoint -->
