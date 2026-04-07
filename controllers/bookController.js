@@ -170,3 +170,4 @@ module.exports = {
 <!-- feat: implement reservation handler in book controller -->
 <!-- fix: prevent reserving already borrowed book -->
 <!-- fix: only allow owner to cancel reservation -->
+<!-- fix: restrict reservation listing to admin role -->
