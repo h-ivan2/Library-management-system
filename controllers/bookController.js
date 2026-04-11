@@ -173,3 +173,4 @@ module.exports = {
 <!-- fix: restrict reservation listing to admin role -->
 <!-- feat: expose availability status in book listing -->
 <!-- feat: implement review handler in book controller -->
+<!-- fix: limit one review per member per book -->
