@@ -174,3 +174,4 @@ module.exports = {
 <!-- feat: expose availability status in book listing -->
 <!-- feat: implement review handler in book controller -->
 <!-- fix: limit one review per member per book -->
+<!-- fix: sort reviews by newest first -->
