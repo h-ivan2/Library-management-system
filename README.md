@@ -46,3 +46,4 @@ See `.env.example` for required values:
 <!-- docs: document reservation endpoints in README -->
 <!-- docs: update README with admin reservation endpoint -->
 <!-- docs: document wishlist endpoints in README -->
+<!-- docs: document review endpoints in README -->
