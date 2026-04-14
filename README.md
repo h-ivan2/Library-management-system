@@ -47,3 +47,4 @@ See `.env.example` for required values:
 <!-- docs: update README with admin reservation endpoint -->
 <!-- docs: document wishlist endpoints in README -->
 <!-- docs: document review endpoints in README -->
+<!-- docs: document admin export endpoint in README -->
