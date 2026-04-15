@@ -21,4 +21,4 @@ const loginLimiter = rateLimit({
 module.exports = {
     limiter,
     loginLimiter
-};
+};<!-- feat: add rate limiting middleware -->
