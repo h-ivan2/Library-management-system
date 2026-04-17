@@ -49,3 +49,4 @@ See `.env.example` for required values:
 <!-- docs: document review endpoints in README -->
 <!-- docs: document admin export endpoint in README -->
 <!-- docs: document rate limiting behaviour in README -->
+<!-- docs: update README with auth token flow -->
