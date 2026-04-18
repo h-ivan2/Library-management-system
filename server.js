@@ -56,3 +56,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 <!-- chore: register notification service in server.js -->
 <!-- chore: register admin routes in server.js -->
+<!-- chore: apply sanitize middleware globally in server.js -->
