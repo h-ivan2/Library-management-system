@@ -2,3 +2,4 @@
 <!-- fix: guard admin routes with adminGuard middleware -->
 <!-- feat: add export members list to CSV endpoint -->
 <!-- feat: add book import from JSON file endpoint -->
+<!-- chore: register audit logger on admin routes -->
