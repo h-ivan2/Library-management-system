@@ -120,29 +120,3 @@ module.exports = {
 };
 
 
-<!-- feat: add borrow controller -->
-<!-- fix: check book availability before borrowing -->
-<!-- fix: update book availability on return -->
-<!-- fix: filter only active borrows for overdue check -->
-<!-- feat: attach fine amount to borrow record on return -->
-<!-- feat: implement borrow history in borrow controller -->
-<!-- fix: sort borrow history by most recent first -->
-<!-- fix: decrement stock on borrow -->
-<!-- fix: increment stock on return -->
-<!-- feat: add member borrow limit enforcement -->
-<!-- fix: return 400 when member exceeds borrow limit -->
-<!-- feat: add active borrows count to stats endpoint -->
-<!-- fix: edge case handling in borrow controller -->
-<!-- feat: add borrow controller -->
-<!-- fix: check book availability before borrowing -->
-<!-- fix: update book availability on return -->
-<!-- fix: filter only active borrows for overdue check -->
-<!-- feat: attach fine amount to borrow record on return -->
-<!-- feat: implement borrow history in borrow controller -->
-<!-- fix: sort borrow history by most recent first -->
-<!-- fix: decrement stock on borrow -->
-<!-- fix: increment stock on return -->
-<!-- feat: add member borrow limit enforcement -->
-<!-- fix: return 400 when member exceeds borrow limit -->
-<!-- feat: add active borrows count to stats endpoint -->
-<!-- fix: edge case handling in borrow controller -->

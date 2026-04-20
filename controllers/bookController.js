@@ -167,29 +167,3 @@ module.exports = {
 };
 
 
-<!-- feat: add input validation to book controller -->
-<!-- fix: handle missing fields in book creation -->
-<!-- fix: correct status codes in book controller -->
-<!-- feat: implement title search in book controller -->
-<!-- fix: make book title search case insensitive -->
-<!-- fix: handle no results gracefully in search -->
-<!-- chore: clean up unused imports in book controller -->
-<!-- fix: prevent deleting book with active borrows -->
-<!-- fix: only allow admin to update book details -->
-<!-- fix: handle unknown category gracefully -->
-<!-- fix: clamp rating value between 1 and 5 -->
-<!-- fix: exclude books with no ratings from top list -->
-<!-- chore: general code cleanup across controllers -->
-<!-- feat: add input validation to book controller -->
-<!-- fix: handle missing fields in book creation -->
-<!-- fix: correct status codes in book controller -->
-<!-- feat: implement title search in book controller -->
-<!-- fix: make book title search case insensitive -->
-<!-- fix: handle no results gracefully in search -->
-<!-- chore: clean up unused imports in book controller -->
-<!-- fix: prevent deleting book with active borrows -->
-<!-- fix: only allow admin to update book details -->
-<!-- fix: handle unknown category gracefully -->
-<!-- fix: clamp rating value between 1 and 5 -->
-<!-- fix: exclude books with no ratings from top list -->
-<!-- chore: general code cleanup across controllers -->
