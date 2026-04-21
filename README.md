@@ -51,3 +51,4 @@ See `.env.example` for required values:
 <!-- docs: document rate limiting behaviour in README -->
 <!-- docs: update README with auth token flow -->
 <!-- docs: document bulk import endpoint in README -->
+<!-- docs: document audit log endpoint in README -->
