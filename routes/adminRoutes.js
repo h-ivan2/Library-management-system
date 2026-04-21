@@ -3,3 +3,4 @@
 <!-- feat: add export members list to CSV endpoint -->
 <!-- feat: add book import from JSON file endpoint -->
 <!-- chore: register audit logger on admin routes -->
+<!-- feat: add get audit logs endpoint for admin -->
