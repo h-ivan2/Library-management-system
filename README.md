@@ -1,50 +1,45 @@
-<!-- chore: review project structure -->
-<!-- docs: add project description to README -->
+# Library Management System
 
-<!-- chore: update README with API routes -->
-<!-- docs: document pagination query params in README -->
-<!-- docs: document borrow and return endpoints -->
-<!-- docs: update README with overdue endpoint -->
-<!-- docs: document fine calculation logic -->
-<!-- docs: add search endpoint to README -->
-<!-- docs: document auth requirement in README -->
-<!-- docs: document login endpoint and JWT usage -->
-<!-- docs: update README with member endpoints -->
-<!-- docs: document delete book endpoint -->
-<!-- docs: add borrow history endpoint to README -->
-<!-- docs: document category filter in README -->
-<!-- docs: document rating endpoint in README -->
-<!-- docs: add top rated books docs to README -->
-<!-- docs: document borrow limit in README -->
-<!-- docs: add health check docs to README -->
-<!-- docs: final README review and polish -->
-<!-- docs: document stats endpoints in README -->
-<!-- chore: final project review -->
-<!-- docs: update README with final project notes -->
+Backend API for a library management app built with Node.js, Express, and MongoDB.
 
-<!-- chore: review project structure -->
-<!-- docs: add project description to README -->
-<!-- chore: update README with API routes -->
+## Features
 
-<!-- chore: review project structure -->
-<!-- docs: add project description to README -->
-<!-- chore: update README with API routes -->
-<!-- docs: document pagination query params in README -->
-<!-- docs: document borrow and return endpoints -->
-<!-- docs: update README with overdue endpoint -->
-<!-- docs: document fine calculation logic -->
-<!-- docs: add search endpoint to README -->
-<!-- docs: document auth requirement in README -->
-<!-- docs: document login endpoint and JWT usage -->
-<!-- docs: update README with member endpoints -->
-<!-- docs: document delete book endpoint -->
-<!-- docs: add borrow history endpoint to README -->
-<!-- docs: document category filter in README -->
-<!-- docs: document rating endpoint in README -->
-<!-- docs: add top rated books docs to README -->
-<!-- docs: document borrow limit in README -->
-<!-- docs: add health check docs to README -->
-<!-- docs: final README review and polish -->
-<!-- docs: document stats endpoints in README -->
-<!-- chore: final project review -->
-<!-- docs: update README with final project notes -->
+- JWT-based authentication and role-based access control
+- Book management (create, update, delete, search, pagination)
+- Borrow/return workflow with overdue and fine tracking
+- Profile and user management endpoints
+- Swagger API documentation at `/api-docs`
+
+## Tech Stack
+
+- Node.js + Express
+- MongoDB + Mongoose
+- JSON Web Tokens (`jsonwebtoken`)
+- Request validation (`express-validator`)
+- Rate limiting (`express-rate-limit`)
+
+## Getting Started
+
+1. Install dependencies:
+   - `npm install`
+2. Create environment file:
+   - `cp .env.example .env`
+3. Fill your `.env` values.
+4. Start the server:
+   - `npm run dev`
+
+## Main Scripts
+
+- `npm run dev` - start in development with nodemon
+- `npm start` - start in production mode
+- `npm run seed` - seed default users
+
+## Environment Variables
+
+See `.env.example` for required values:
+
+- `PORT`
+- `MONGODB_URI`
+- `JWT_SECRET`
+- `EMAIL_USER`
+- `EMAIL_PASS`
