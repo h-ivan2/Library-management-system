@@ -53,3 +53,4 @@ See `.env.example` for required values:
 <!-- docs: document bulk import endpoint in README -->
 <!-- docs: document audit log endpoint in README -->
 <!-- docs: final pre-submission README polish -->
+<!-- docs: add project setup instructions to README -->
