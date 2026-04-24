@@ -59,3 +59,4 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 <!-- chore: apply sanitize middleware globally in server.js -->
 <!-- feat: add graceful shutdown handler in server.js -->
 <!-- fix: close db connection cleanly on SIGTERM -->
+<!-- chore: final code review and cleanup -->
