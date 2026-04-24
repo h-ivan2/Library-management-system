@@ -103,7 +103,7 @@ const getBookById=async(req,res) =>{
     const book=await Book.findById(id);
 
     if(!book){
-      return res.status(400).json({message: "Book not found"});
+      return res.status(404).json({message: "Book not found"});
     }
     res.json(book);
   }catch (error){
@@ -114,7 +114,7 @@ const getBookById=async(req,res) =>{
 
 const searchBooks = async (req, res) => {
   try {
-    const { query, author, isbn } = req.query;
+    const { query, author, isbn, available } = req.query;
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
@@ -137,6 +137,10 @@ const searchBooks = async (req, res) => {
       filter.isbn = { $regex: isbn, $options: 'i' };
     }
 
+    if (available !== undefined) {
+      filter.available = available === 'true';
+    }
+
     const books = await Book.find(filter)
       .skip(skip)
       .limit(limit)
@@ -149,7 +153,7 @@ const searchBooks = async (req, res) => {
       currentPage: page,
       totalPages: Math.ceil(totalBooks / limit),
       totalBooks,
-      filters: { query, author, isbn }
+      filters: { query, author, isbn, available }
     });
   } catch (error) {
     console.error(error);
