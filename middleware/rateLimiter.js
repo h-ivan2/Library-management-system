@@ -21,5 +21,4 @@ const loginLimiter = rateLimit({
 module.exports = {
     limiter,
     loginLimiter
-};<!-- feat: add rate limiting middleware -->
-<!-- fix: return 429 with retry-after header on limit hit -->
+};

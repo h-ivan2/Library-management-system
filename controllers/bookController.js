@@ -167,12 +167,3 @@ module.exports = {
 };
 
 
-<!-- feat: implement reservation handler in book controller -->
-<!-- fix: prevent reserving already borrowed book -->
-<!-- fix: only allow owner to cancel reservation -->
-<!-- fix: restrict reservation listing to admin role -->
-<!-- feat: expose availability status in book listing -->
-<!-- feat: implement review handler in book controller -->
-<!-- fix: limit one review per member per book -->
-<!-- fix: sort reviews by newest first -->
-<!-- fix: remove all debug console.logs -->

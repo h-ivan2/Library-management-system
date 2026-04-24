@@ -120,4 +120,3 @@ module.exports = {
 };
 
 
-<!-- fix: sync availability status on borrow and return -->
